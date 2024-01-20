@@ -7,7 +7,7 @@ const routBookingRoom = require("./routes/bookingRoom.js");
 const database = require("./config/dataBase.js");
 const tokenVerify = require("./middlewares/auth.js");
 const orderController = require("./controllers/orderController.js");
-const googleAuth = require("./middlewares/googleAuth.js")
+const googleAuth = require("./middlewares/googleAuth.js");
 
 const PORT = process.env.PORT || 3000;
 const app = express();
@@ -37,10 +37,10 @@ app.get("/dropAllDB", (req, res) => {
   dropAllTables();
 });
 
+app.use(googleAuth);
 app.use(routAuth);
 app.use(routProduk);
 app.get("/getBookingRooms", orderController.getBookingRoom);
-app.use(googleAuth)
 app.use(tokenVerify);
 
 app.post("/room", orderController.bookingRoom);

@@ -1,13 +1,12 @@
 const jwt = require("jsonwebtoken");
 
-const secret = "rahasia-dapur-backend"
-const expiredDay = 7
+const secret = "rahasia-dapur-backend";
+const expiredDay = 7;
 
 function generateAccessToken(user) {
-
   const payload = {
     username: user.username,
-    password: user.password
+    password: user.password,
   };
 
   const options = { expiresIn: `${expiredDay}d` };
@@ -25,6 +24,6 @@ function verifyAccessToken(token) {
 }
 
 module.exports = {
-  "generateToken": generateAccessToken,
-  "verifyToken": verifyAccessToken,
-}
+  generateToken: generateAccessToken,
+  verifyToken: verifyAccessToken,
+};
