@@ -23,7 +23,17 @@ function verifyAccessToken(token) {
   }
 }
 
+function verifyGoogleToken(token) {
+  try {
+    const decoded = jwt.verify(token, process.env.GOOGLE_AUTH_SECRET);
+    return { success: true, data: decoded };
+  } catch (error) {
+    return { success: false, error: error.message };
+  }
+}
+
 module.exports = {
   generateToken: generateAccessToken,
   verifyToken: verifyAccessToken,
+  verifyGoogleToken: verifyGoogleToken
 };
