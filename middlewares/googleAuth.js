@@ -8,7 +8,7 @@ router.use(express.json());
 const oAuthClient = new google.auth.OAuth2(
   process.env.GOOGLE_CLIENT_ID,
   process.env.GOOGLE_CLIENT_SECRET,
-  "https://server-production-backend.up.railway.app/google/auth/callback"
+  "https://server-production-backend.up.railway.app/auth/google/callback"
 );
 
 const scopes = [
@@ -22,11 +22,11 @@ const authorizationURL = oAuthClient.generateAuthUrl({
   include_granted_scopes: true,
 });
 
-router.get("/google/auth", (req, res) => {
+router.get("/auth/google", (req, res) => {
   res.redirect(authorizationURL);
 });
 
-router.get("/google/auth/callback", async (req, res) => {
+router.get("/auth/google/callback", async (req, res) => {
   const code = req.query.code;
   const { tokens } = await oAuthClient.getToken(code);
   oAuthClient.setCredentials(tokens);
