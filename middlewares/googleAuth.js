@@ -8,7 +8,7 @@ router.use(express.json());
 const oAuthClient = new google.auth.OAuth2(
   process.env.GOOGLE_CLIENT_ID,
   process.env.GOOGLE_CLIENT_SECRET,
-  "https://server-production-backend.up.railway.router/google/auth/callback"
+  "https://server-production-backend.up.railway.app/google/auth/callback"
 );
 
 const scopes = [
@@ -45,4 +45,4 @@ router.get("auth/google/callback", async (req, res) => {
   req.userAuth = data;
 });
 
-module.exports = routers;
+module.exports = router;
