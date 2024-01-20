@@ -2,6 +2,7 @@ const express = require("express");
 require("dotenv").config();
 const { google } = require("googleapis");
 const router = express.Router();
+const jwt = require("jsonwebtoken");
 
 router.use(express.json());
 const oAuthClient = new google.auth.OAuth2(
@@ -40,8 +41,9 @@ router.get("/auth/google/callback", async (req, res) => {
   if (!data) {
     return res.json({ data: data });
   }
-  res.send("SUCCESS");
-  req.userAuth = data;
+  const googleToken = jwt.sign({ user: data }, process.env.GOOGLE_AUTH_SECRET, { expiresIn: "7d" });
+
+  return res.json({ google_token: googleToken });
 });
 
 module.exports = router;
