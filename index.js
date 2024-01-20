@@ -14,14 +14,6 @@ const app = express();
 
 const allowedOrigins = "*";
 
-app.use(
-  cors({
-    origin: allowedOrigins,
-    methods: ["GET", "POST"],
-    allowedHeaders: ["Content-Type", "Authorization"],
-  })
-);
-
 app.get("/dropAllDB", (req, res) => {
   const dropAllTables = async () => {
     try {
@@ -35,6 +27,13 @@ app.get("/dropAllDB", (req, res) => {
     }
   };
   dropAllTables();
+});
+
+app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "https://project-akhir-uas-frontend.vercel.app");
+  res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
+  next();
 });
 
 app.use(googleAuth);
