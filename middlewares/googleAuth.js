@@ -41,7 +41,7 @@ router.get("/auth/google/callback", async (req, res) => {
   if (!data) {
     return res.json({ data: data });
   }
-  res.send("SUCCESS")
+  res.send("SUCCESS");
   req.userAuth = data;
 });
 
