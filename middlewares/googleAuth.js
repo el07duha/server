@@ -22,11 +22,11 @@ const authorizationURL = oAuthClient.generateAuthUrl({
   include_granted_scopes: true,
 });
 
-router.get("/auth/google", (req, res) => {
+router.get("/google/auth", (req, res) => {
   res.redirect(authorizationURL);
 });
 
-router.get("/auth/google/callback", async (req, res) => {
+router.get("/google/auth/callback", async (req, res) => {
   const code = req.query.code;
   const { tokens } = await oAuthClient.getToken(code);
   oAuthClient.setCredentials(tokens);
