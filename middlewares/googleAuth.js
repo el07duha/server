@@ -1,6 +1,5 @@
 const express = require("express");
-const { dotenv } = require("dotenv/config");
-dotenv.config();
+require("dotenv").config();
 const { google } = require("googleapis");
 const router = express.Router();
 
